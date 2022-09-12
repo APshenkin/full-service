@@ -1,0 +1,31 @@
+[package]
+name = "mc-full-service-core"
+version = "2.0.0"
+authors = ["MobileCoin"]
+edition = "2021"
+
+[features]
+test-only = []
+
+[dependencies]
+# External dependencies
+rand = { version = "0.8", default-features = false }
+displaydoc = {version = "0.2", default-features = false }
+serde = { version = "1.0", default-features = false, features = ["alloc", "derive"] }
+serde-big-array = "0.4.1"
+serde_derive = "1.0"
+serde_json = { version = "1.0", features = ["preserve_order"] }
+tiny-bip39 = "1.0"
+hex = {version = "0.4", default-features = false }
+
+# MobileCoin dependencies
+mc-api = { path = "../../mobilecoin/api" }
+mc-account-keys = { path = "../../mobilecoin/account-keys" }
+mc-account-keys-slip10 = { path = "../../mobilecoin/account-keys/slip10" }
+mc-crypto-keys = { path = "../../mobilecoin/crypto/keys", default-features = false }
+mc-crypto-ring-signature-signer = { path = "../../mobilecoin/crypto/ring-signature/signer" }
+mc-transaction-core = { path = "../../mobilecoin/transaction/core" }
+mc-transaction-std = { path = "../../mobilecoin/transaction/std" }
+mc-common = { path = "../../mobilecoin/common", default-features = false }
+mc-fog-report-validation = { path = "../../mobilecoin/fog/report/validation" }
+mc-util-serial = { path = "../../mobilecoin/util/serial", default-features = false }
