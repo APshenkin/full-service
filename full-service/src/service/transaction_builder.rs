@@ -430,20 +430,24 @@ impl<FPR: FogPubkeyResolver + 'static> WalletTransactionBuilder<FPR> {
             }
 
             let change_value = input_value - *total_value;
-            let change_amount = Amount::new(change_value, token_id);
-            let tx_out_context = transaction_builder.add_change_output(
-                change_amount,
-                &reserved_subaddresses,
-                &mut rng,
-            )?;
 
-            let change_txo = OutputTxo {
-                tx_out: tx_out_context.tx_out,
-                recipient_public_address: reserved_subaddresses.change_subaddress.clone(),
-                confirmation_number: tx_out_context.confirmation,
-                amount: change_amount,
-            };
-            change_txos.push(change_txo);
+            if change_value > 0 {
+                let change_amount = Amount::new(change_value, token_id);
+                let tx_out_context = transaction_builder.add_change_output(
+                    change_amount,
+                    &reserved_subaddresses,
+                    &mut rng,
+                )?;
+
+                let change_txo = OutputTxo {
+                    tx_out: tx_out_context.tx_out,
+                    recipient_public_address: reserved_subaddresses.change_subaddress.clone(),
+                    confirmation_number: tx_out_context.confirmation,
+                    amount: change_amount,
+                };
+
+                change_txos.push(change_txo);
+            }
         }
 
         let unsigned_tx =

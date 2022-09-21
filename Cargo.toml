@@ -8,6 +8,7 @@ members = [
     "validator/api",
     "validator/connection",
     "validator/service",
+    "wasm-sdk"
 ]
 exclude = [
     "mobilecoin",
